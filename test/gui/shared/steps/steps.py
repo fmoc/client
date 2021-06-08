@@ -170,8 +170,10 @@ def shareResource(resource):
         return False
     for line in socketConnect.get_available_responses():
         if line.startswith('SHARE:OK') and line.endswith(resource):
+            print("True")
             return True
         elif line.endswith(resource):
+            print("True")
             return False
 
 
@@ -268,6 +270,11 @@ def step(context, stepPart1, stepPart2):
 @Then(r"^(.*) on the server$", regexp=True)
 def step(context, stepPart1):
     executeStepThroughMiddleware(context, "Then " + stepPart1)
+
+
+@Given(r"^(.*) on the server$", regexp=True)
+def step(context, stepPart1):
+    executeStepThroughMiddleware(context, "Given " + stepPart1)
 
 
 @Then('the file "|any|" should exist on the file system with the following content')
@@ -434,7 +441,7 @@ def step(context):
 
 @When('user "|any|" opens the sharing dialog of "|any|" using the client-UI')
 def step(context, receiver, resource):
-    openSharingDialog(context, resource, 'folder')
+    openSharingDialog(context, resource, 'file')
 
 
 @Then('the error text "|any|" should be displayed in the sharing dialog')
@@ -640,3 +647,23 @@ def step(context):
         'Ser&ver Address',
     )
     waitForObject(AccountConnectionWizard.SERVER_ADDRESS_BOX)
+
+
+@When(
+    'the user removes permission "|any|" from the group "|any|" of resource "|any|" using the client-UI'
+)
+def step(context, permissions, group, resource):
+    resource = substituteInLineCodes(context, resource)
+    openSharingDialog(context, resource)
+
+
+#     waitFor(lambda: isFileSynced(resource), context.userData['clientSyncTimeout'] * 1000)
+#     waitFor(lambda: shareResource(resource), context.userData['clientSyncTimeout'] * 1000)
+#     mouseClick(waitForObject(names.sharingDialogUG_shareeLineEdit_QLineEdit), 0, 0, Qt.NoModifier, Qt.LeftButton)
+#     type(waitForObject(names.sharingDialogUG_shareeLineEdit_QLineEdit), "grp1")
+#     mouseClick(waitForObjectItem(names.o_QListView, "grp1 (group)"), 0, 0, Qt.NoModifier, Qt.LeftButton)
+
+
+@Then('the error "|any|" should be displayed')
+def step(context, errorMessage):
+    test.compare(str(waitForObjectExists(names.sharingDialog_error).text), errorMessage)

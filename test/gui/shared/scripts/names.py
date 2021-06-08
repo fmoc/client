@@ -80,6 +80,7 @@ qt_tabwidget_stackedwidget_OCC_ShareLinkWidget_OCC_ShareLinkWidget = {"container
 oCC_ShareLinkWidget_checkBox_password_QCheckBox = {"container": qt_tabwidget_stackedwidget_OCC_ShareLinkWidget_OCC_ShareLinkWidget, "name": "checkBox_password", "type": "QCheckBox", "visible": 1}
 oCC_ShareLinkWidget_widget_editing_QWidget = {"container": qt_tabwidget_stackedwidget_OCC_ShareLinkWidget_OCC_ShareLinkWidget, "name": "widget_editing", "type": "QWidget", "visible": 1}
 oCC_ShareLinkWidget_checkBox_password_QProgressIndicator = {"aboveWidget": oCC_ShareLinkWidget_widget_editing_QWidget, "container": qt_tabwidget_stackedwidget_OCC_ShareLinkWidget_OCC_ShareLinkWidget, "leftWidget": oCC_ShareLinkWidget_checkBox_password_QCheckBox, "type": "QProgressIndicator", "unnamed": 1, "visible": 1}
+sharingDialog_error = {"name": "errorLabel", "type": "QLabel", "visible": 1}
 sharingDialog_label_name_QLabel = {"name": "label_name", "type": "QLabel", "visible": 1, "window": sharingDialog_OCC_ShareDialog}
 oCC_ShareLinkWidget_linkShares_QTableWidget = {"container": qt_tabwidget_stackedwidget_OCC_ShareLinkWidget_OCC_ShareLinkWidget, "name": "linkShares", "type": "QTableWidget", "visible": 1}
 linkShares_QToolButton = {"container": oCC_ShareLinkWidget_linkShares_QTableWidget, "text": "...", "type": "QToolButton", "unnamed": 1, "visible": 1}
