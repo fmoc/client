@@ -667,3 +667,13 @@ def step(context, permissions, group, resource):
 @Then('the error "|any|" should be displayed')
 def step(context, errorMessage):
     test.compare(str(waitForObjectExists(names.sharingDialog_error).text), errorMessage)
+
+
+@When("the user closes the sharing dialog")
+def step(context):
+    clickButton(waitForObject(names.sharingDialog_Close_QPushButton))
+
+
+@Then('the message "|any|" should be displayed in the in the sharing dialog')
+def step(context, message):
+    print(message)

@@ -15,6 +15,7 @@ Feature: Sharing
         When the user adds "Brian Murphy" as collaborator of resource "%client_sync_path%/textfile0.txt" with permissions "edit,share" using the client-UI
         Then user "Brian Murphy" should be listed in the collaborators list for file "%client_sync_path%/textfile0.txt" with permissions "edit,share" on the client-UI
 
+
     @issue-7459
     Scenario: Progress indicator should not be visible after unselecting the password protection checkbox while sharing through public link
         Given user "Alice" has uploaded on the server file with content "ownCloud test text file 0" to "/textfile0.txt"
@@ -133,6 +134,23 @@ Feature: Sharing
             | path        | /simple-folder |
             | name        | Public link    |
         And the public should not be able to download the file "lorem.txt" from the last created public link by "Alice" on the server
+
+
+    Scenario: Collaborator should not see to whom a file is shared.
+        Given user "Brian" has been created on the server with default attributes and without skeleton files
+        And user "Alice" has uploaded on the server file with content "ownCloud test text file 0" to "/textfile0.txt"
+        And user "Alice" has set up a client with default settings
+        When the user adds "Brian Murphy" as collaborator of resource "%client_sync_path%/textfile0.txt" with permissions "edit,share" using the client-UI
+		#And the user closes the sharing dialog
+		And the user adds an account with
+            | server      | %local_server%     |
+            | user        | Brian              |
+            | password    | AaBb2Cc3Dd4        |
+            | localfolder | %client_sync_path% |
+        And the user removes the connection for user "Alice" and host %local_server_hostname%
+        And user "Brian" opens the sharing dialog of "%client_sync_path%/textfile0.txt" using the client-UI
+        Then the message "This file is not shared with anyone" should be displayed in the in the sharing dialog
+
 
     Scenario: User (non-author) can not remove permission from a group to which the file is already shared
         Given the setting "shareapi_auto_accept_share" on the server of app "core" has been set to "yes"
