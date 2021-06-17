@@ -674,6 +674,22 @@ def step(context):
     clickButton(waitForObject(names.sharingDialog_Close_QPushButton))
 
 
-@Then('the message "|any|" should be displayed in the in the sharing dialog')
-def step(context, message):
-    print(message)
+# @Then('the message "|any|" should be displayed in the in the sharing dialog')
+# def step(context, message):
+#     print(message)
+
+
+@Then(
+    "the message \"This file is not shared with anyone\" should be displayed in the in the sharing dialog"
+)
+def step(context):
+    snooze(10000)
+    mouseClick(
+        waitForObject(
+            names.scrollArea_The_item_is_not_shared_with_any_users_or_groups_QLabel
+        ),
+        124,
+        123,
+        Qt.NoModifier,
+        Qt.LeftButton,
+    )
