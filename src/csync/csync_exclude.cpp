@@ -362,7 +362,7 @@ bool ExcludedFiles::isExcludedRemote(const QString &filePath, const QString &bas
     }
 
     if (excludeHidden) {
-        // Check ther parent directories for . hidden files
+        // Check their parent directories for . hidden files
         if (relativePath.startsWith(QLatin1Char('.')) || relativePath.contains(QLatin1String("/."))) {
             return true;
         }
