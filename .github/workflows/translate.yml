@@ -35,7 +35,9 @@ jobs:
         run: bash .github/workflows/run-in-docker.sh owncloudci/transifex:latest "cd translations && make l10n-clean"
 
       - name: update-repo-before-commit
+        if: always()
         run: |
+          set -x
           git status
           git stash
           git pull --ff-only origin
